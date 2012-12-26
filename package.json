@@ -1,0 +1,25 @@
+{
+  "name": "sql-where",
+  "version": "0.0.1",
+  "description": "Generate your where condition SQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JacksonTian/where.git"
+  },
+  "devDependencies": {
+    "should": "*",
+    "mocha": "*",
+    "jscover": "*"
+  },
+  "keywords": [
+    "SQL",
+    "WHERE"
+  ],
+  "author": "Jackson Tian",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
