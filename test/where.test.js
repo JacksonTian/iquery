@@ -137,6 +137,21 @@ describe('where.js', function () {
         "hehe LIKE :hehe"
       ]);
     });
+
+    it('should ok when lte & gte', function () {
+      var condition = {
+        date: {
+          $gte: "startdate",
+          $lte: "enddate"
+        }
+      };
+      var where = new Where();
+      where.toString().should.equal('');
+      where.pair(condition).should.eql([
+        "date >= :startdate",
+        "date <= :enddate"
+      ]);
+    });
   });
 
   describe('and', function () {
@@ -200,15 +215,23 @@ describe('where.js', function () {
   });
 
   describe('bracket', function () {
-    it('should get where', function () {
+    it('should ok or', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
         'hehe': 'zaodianshui'
-      }).bracket().toString().should.equal('(hehe = :zaodianshui)');
+      }).bracket().toString().should.equal('hehe = :zaodianshui');
     });
 
-    it('should get where when multi', function () {
+    it('should ok and', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.and({
+        'hehe': 'zaodianshui'
+      }).bracket().toString().should.equal('hehe = :zaodianshui');
+    });
+
+    it('should ok when multi', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
@@ -226,7 +249,7 @@ describe('where.js', function () {
         'hehe': 'zaodianshui'
       }).bracket().and({
         'zaima': "quxizao"
-      }).toString().should.equal('(hehe = :zaodianshui) AND zaima = :quxizao');
+      }).toString().should.equal('hehe = :zaodianshui AND zaima = :quxizao');
     });
 
     it('should get where or or', function () {
@@ -236,7 +259,7 @@ describe('where.js', function () {
         'hehe': 'zaodianshui'
       }).bracket().or({
         'zaima': "quxizao"
-      }).toString().should.equal('(hehe = :zaodianshui) OR zaima = :quxizao');
+      }).toString().should.equal('hehe = :zaodianshui OR zaima = :quxizao');
     });
 
     it('should get where when multi', function () {
