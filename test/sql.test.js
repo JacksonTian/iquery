@@ -20,6 +20,22 @@ describe('sql.js', function () {
     });
   });
 
+  describe('orderBy', function () {
+    it('should be ok with string', function () {
+      var sql = new SQL();
+      sql.select('*').from('table').orderBy('count(order_id) DESC');
+      sql.toString().should.equal('SELECT * FROM table ORDER BY count(order_id) DESC');
+    });
+
+    it('should be ok with Order', function () {
+      var sql = new SQL();
+      var order = new Order();
+      order.sort(['count(order_id)', true]);
+      sql.select('*').from('table').orderBy(order);
+      sql.toString().should.equal('SELECT * FROM table ORDER BY count(order_id) DESC');
+    });
+  });
+
   describe('all', function () {
     it('should be ok', function () {
       var sql = new SQL();
