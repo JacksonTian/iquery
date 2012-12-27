@@ -32,7 +32,7 @@ describe('sql.js', function () {
     it('should be ok case1', function () {
       var sql = new SQL();
       var where = new Where();
-      where.and({tag: 1});
+      where.and({tag: 'tag'});
       sql.select('auction').from("trade").where(where).groupBy('auction').orderBy('count(order) DESC').limit(200);
       sql.toString().should.equal('SELECT auction FROM trade WHERE tag = :tag GROUP BY auction ORDER BY count(order) DESC LIMIT 0, 200');
     });
@@ -43,15 +43,15 @@ describe('sql.js', function () {
       var condition = new Where();
       condition.or({
         cid: {
-          $in: [1, 2, 3]
+          $in: 'cids'
         },
         cid1: {
-          $in: [4, 5, 6]
+          $in: 'cid1s'
         }
       }).bracket();
-      where.and({tag1: 1, tag2: 2}).and(condition.toString());
+      where.and({tag1: 'tag1', tag2: 'tag2'}).and(condition.toString());
       sql.select('auction').from("trade").where(where).groupBy('auction').orderBy('count(order) DESC').limit(200);
-      sql.toString().should.equal('SELECT auction FROM trade WHERE tag1 = :tag1 AND tag2 = :tag2 AND (cid IN (:cid__in) OR cid1 IN (:cid1__in)) GROUP BY auction ORDER BY count(order) DESC LIMIT 0, 200');
+      sql.toString().should.equal('SELECT auction FROM trade WHERE tag1 = :tag1 AND tag2 = :tag2 AND (cid IN (:cids) OR cid1 IN (:cid1s)) GROUP BY auction ORDER BY count(order) DESC LIMIT 0, 200');
     });
   });
 });

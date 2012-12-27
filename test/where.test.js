@@ -14,9 +14,9 @@ describe('where.js', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.pair({
-        'hehe': '早点睡'
+        'hehe': 'zaodianshui'
       }).should.eql([
-        "hehe = :hehe"
+        "hehe = :zaodianshui"
       ]);
     });
 
@@ -24,11 +24,11 @@ describe('where.js', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.pair({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
       }).should.eql([
-        "hehe = :hehe",
-        "zaima = :zaima"
+        "hehe = :zaodianshui",
+        "zaima = :quxizao"
       ]);
     });
 
@@ -37,10 +37,10 @@ describe('where.js', function () {
       where.toString().should.equal('');
       where.pair({
         'hehe': {
-          $in: []
+          $in: 'zaodianshui'
         }
       }).should.eql([
-        "hehe IN (:hehe__in)"
+        "hehe IN (:zaodianshui)"
       ]);
     });
 
@@ -52,7 +52,7 @@ describe('where.js', function () {
           $contains: 'quxizao'
         }
       }).should.eql([
-        "hehe CONTAINS (:hehe__contains)"
+        "hehe CONTAINS (:quxizao)"
       ]);
     });
 
@@ -71,10 +71,10 @@ describe('where.js', function () {
       where.toString().should.equal('');
       where.pair({
         'hehe': {
-          $ne: "- -"
+          $ne: "quxizao"
         }
       }).should.eql([
-        "hehe <> :hehe__ne"
+        "hehe <> :quxizao"
       ]);
     });
 
@@ -83,7 +83,7 @@ describe('where.js', function () {
       where.toString().should.equal('');
       where.pair({
         'hehe': {
-          $gte: []
+          $gte: 'hehe__gte'
         }
       }).should.eql([
         "hehe >= :hehe__gte"
@@ -95,7 +95,7 @@ describe('where.js', function () {
       where.toString().should.equal('');
       where.pair({
         'hehe': {
-          $gt: []
+          $gt: 'hehe__gt'
         }
       }).should.eql([
         "hehe > :hehe__gt"
@@ -107,7 +107,7 @@ describe('where.js', function () {
       where.toString().should.equal('');
       where.pair({
         'hehe': {
-          $lte: []
+          $lte: 'hehe__lte'
         }
       }).should.eql([
         "hehe <= :hehe__lte"
@@ -119,7 +119,7 @@ describe('where.js', function () {
       where.toString().should.equal('');
       where.pair({
         'hehe': {
-          $lt: []
+          $lt: 'hehe__lt'
         }
       }).should.eql([
         "hehe < :hehe__lt"
@@ -134,7 +134,7 @@ describe('where.js', function () {
           $like: 'hehe'
         }
       }).should.eql([
-        "hehe LIKE :hehe__like"
+        "hehe LIKE :hehe"
       ]);
     });
   });
@@ -144,28 +144,28 @@ describe('where.js', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.and({
-        'hehe': '早点睡'
-      }).toString().should.equal('hehe = :hehe');
+        'hehe': 'zaodianshui'
+      }).toString().should.equal('hehe = :zaodianshui');
     });
 
     it('should get where when multi', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.and({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
-      }).toString().should.equal('hehe = :hehe AND zaima = :zaima');
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
+      }).toString().should.equal('hehe = :zaodianshui AND zaima = :quxizao');
     });
 
     it('should get and', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.and({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
       }).and(new Where().and({
-        'ganma': '忙不'
-      })).toString().should.equal('hehe = :hehe AND zaima = :zaima AND ganma = :ganma');
+        'ganma': 'mangbu'
+      })).toString().should.equal('hehe = :zaodianshui AND zaima = :quxizao AND ganma = :mangbu');
     });
   });
 
@@ -174,28 +174,28 @@ describe('where.js', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡'
-      }).toString().should.equal('hehe = :hehe');
+        'hehe': 'zaodianshui'
+      }).toString().should.equal('hehe = :zaodianshui');
     });
 
     it('should get where when multi', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
-      }).toString().should.equal('hehe = :hehe OR zaima = :zaima');
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
+      }).toString().should.equal('hehe = :zaodianshui OR zaima = :quxizao');
     });
 
     it('should get and', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
       }).or(new Where().or({
-        'ganma': '忙不'
-      })).toString().should.equal('hehe = :hehe OR zaima = :zaima OR ganma = :ganma');
+        'ganma': 'mangbu'
+      })).toString().should.equal('hehe = :zaodianshui OR zaima = :quxizao OR ganma = :mangbu');
     });
   });
 
@@ -204,17 +204,17 @@ describe('where.js', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡'
-      }).bracket().toString().should.equal('(hehe = :hehe)');
+        'hehe': 'zaodianshui'
+      }).bracket().toString().should.equal('(hehe = :zaodianshui)');
     });
 
     it('should get where when multi', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
-      }).bracket().toString().should.equal('(hehe = :hehe OR zaima = :zaima)');
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
+      }).bracket().toString().should.equal('(hehe = :zaodianshui OR zaima = :quxizao)');
     });
   });
 
@@ -223,54 +223,54 @@ describe('where.js', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡'
+        'hehe': 'zaodianshui'
       }).bracket().and({
-        'zaima': "去洗澡"
-      }).toString().should.equal('(hehe = :hehe) AND zaima = :zaima');
+        'zaima': "quxizao"
+      }).toString().should.equal('(hehe = :zaodianshui) AND zaima = :quxizao');
     });
 
     it('should get where or or', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡'
+        'hehe': 'zaodianshui'
       }).bracket().or({
-        'zaima': "去洗澡"
-      }).toString().should.equal('(hehe = :hehe) OR zaima = :zaima');
+        'zaima': "quxizao"
+      }).toString().should.equal('(hehe = :zaodianshui) OR zaima = :quxizao');
     });
 
     it('should get where when multi', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
-      }).bracket().toString().should.equal('(hehe = :hehe OR zaima = :zaima)');
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
+      }).bracket().toString().should.equal('(hehe = :zaodianshui OR zaima = :quxizao)');
     });
 
     it('should a and b or c and d', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.and({
-        'hehe': '早点睡',
-        'zaima': '去洗澡'
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
       }).or(new Where().and({
-        'ganma': '忙不',
-        'nvshen': '屌丝'
-      })).toString().should.equal('hehe = :hehe AND zaima = :zaima OR ganma = :ganma AND nvshen = :nvshen');
+        'ganma': 'mangbu',
+        'nvshen': 'diaosi'
+      })).toString().should.equal('hehe = :zaodianshui AND zaima = :quxizao OR ganma = :mangbu AND nvshen = :diaosi');
     });
 
     it('should a and (b or c) and d', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.and({
-        'hehe': '早点睡'
+        'hehe': 'zaodianshui'
       }).and(new Where().or({
-        'zaima': '去洗澡',
-        'ganma': '忙不'
+        'zaima': 'quxizao',
+        'ganma': 'mangbu'
       }).bracket()).and({
-        'nvshen': '屌丝'
-      }).toString().should.equal('hehe = :hehe AND (zaima = :zaima OR ganma = :ganma) AND nvshen = :nvshen');
+        'nvshen': 'diaosi'
+      }).toString().should.equal('hehe = :zaodianshui AND (zaima = :quxizao OR ganma = :mangbu) AND nvshen = :diaosi');
     });
   });
 });
