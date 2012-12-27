@@ -156,6 +156,17 @@ describe('where.js', function () {
         'zaima': '去洗澡'
       }).toString().should.equal('hehe = :hehe AND zaima = :zaima');
     });
+
+    it('should get and', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.and({
+        'hehe': '早点睡',
+        'zaima': '去洗澡'
+      }).and(new Where().and({
+        'ganma': '忙不'
+      })).toString().should.equal('hehe = :hehe AND zaima = :zaima AND ganma = :ganma');
+    });
   });
 
   describe('or', function () {
@@ -174,6 +185,17 @@ describe('where.js', function () {
         'hehe': '早点睡',
         'zaima': '去洗澡'
       }).toString().should.equal('hehe = :hehe OR zaima = :zaima');
+    });
+
+    it('should get and', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.or({
+        'hehe': '早点睡',
+        'zaima': '去洗澡'
+      }).or(new Where().or({
+        'ganma': '忙不'
+      })).toString().should.equal('hehe = :hehe OR zaima = :zaima OR ganma = :ganma');
     });
   });
 
@@ -224,6 +246,31 @@ describe('where.js', function () {
         'hehe': '早点睡',
         'zaima': '去洗澡'
       }).bracket().toString().should.equal('(hehe = :hehe OR zaima = :zaima)');
+    });
+
+    it('should a and b or c and d', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.and({
+        'hehe': '早点睡',
+        'zaima': '去洗澡'
+      }).or(new Where().and({
+        'ganma': '忙不',
+        'nvshen': '屌丝'
+      })).toString().should.equal('hehe = :hehe AND zaima = :zaima OR ganma = :ganma AND nvshen = :nvshen');
+    });
+
+    it('should a and (b or c) and d', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.and({
+        'hehe': '早点睡'
+      }).and(new Where().or({
+        'zaima': '去洗澡',
+        'ganma': '忙不'
+      }).bracket()).and({
+        'nvshen': '屌丝'
+      }).toString().should.equal('hehe = :hehe AND (zaima = :zaima OR ganma = :ganma) AND nvshen = :nvshen');
     });
   });
 });
