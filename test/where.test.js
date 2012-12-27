@@ -246,7 +246,16 @@ describe('where.js', function () {
       }).bracket().toString().should.equal('hehe = :zaodianshui');
     });
 
-    it('should ok when multi', function () {
+    it('should ok when multi and', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.and({
+        'hehe': 'zaodianshui',
+        'zaima': 'quxizao'
+      }).bracket().toString().should.equal('hehe = :zaodianshui AND zaima = :quxizao');
+    });
+
+    it('should ok when multi or', function () {
       var where = new Where();
       where.toString().should.equal('');
       where.or({
@@ -309,6 +318,20 @@ describe('where.js', function () {
       }).bracket()).and({
         'nvshen': 'diaosi'
       }).toString().should.equal('hehe = :zaodianshui AND (zaima = :quxizao OR ganma = :mangbu) AND nvshen = :diaosi');
+    });
+
+    it('should a and b and c or d', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.and({a: 'b', c: 'd', e: 'f'}).or({g: 'h'}).toString()
+      .should.equal('a = :b AND c = :d AND e = :f OR g = :h');
+    });
+
+    it('should a and b or c or d', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.and({a: 'b', c: 'd'}).or({e: 'f', g: 'h'}).toString()
+      .should.equal('a = :b AND c = :d OR e = :f OR g = :h');
     });
   });
 });

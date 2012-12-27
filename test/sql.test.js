@@ -18,6 +18,16 @@ describe('sql.js', function () {
       var sql = new SQL();
       sql.select('*').toString().should.equal('SELECT *');
     });
+
+    it('should be ok when empty', function () {
+      var sql = new SQL();
+      sql.select().toString().should.equal('SELECT *');
+    });
+
+    it('should be ok Array', function () {
+      var sql = new SQL();
+      sql.select(['a', 'b', 'c', 'd']).toString().should.equal('SELECT a, b, c, d');
+    });
   });
 
   describe('orderBy', function () {
