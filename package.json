@@ -1,6 +1,6 @@
 {
   "name": "iquery",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate your where condition SQL",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/JacksonTian/sql.git"
+    "url": "git://github.com/JacksonTian/iquery.git"
   },
   "devDependencies": {
     "should": "*",
