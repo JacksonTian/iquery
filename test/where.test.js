@@ -20,6 +20,15 @@ describe('where.js', function () {
       ]);
     });
 
+    it('should get pair when property at prototype', function () {
+      var Obj = function () {
+      };
+      Obj.prototype.key = "prototype_value";
+      var where = new Where();
+      where.toString().should.equal('');
+      where.pair(new Obj()).should.eql([]);
+    });
+
     it('should get pair when multi', function () {
       var where = new Where();
       where.toString().should.equal('');
@@ -191,6 +200,12 @@ describe('where.js', function () {
       where.or({
         'hehe': 'zaodianshui'
       }).toString().should.equal('hehe = :zaodianshui');
+    });
+
+    it('should ok when string', function () {
+      var where = new Where();
+      where.toString().should.equal('');
+      where.or('hehe = :zaodianshui').toString().should.equal('hehe = :zaodianshui');
     });
 
     it('should get where when multi', function () {
