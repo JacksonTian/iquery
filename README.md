@@ -1,5 +1,7 @@
 iQuery [![Build Status](https://travis-ci.org/JacksonTian/iquery.png?branch=master)](https://travis-ci.org/JacksonTian/iquery)
 =====
+> select('*').from('table').where('1 = 1').groupBy('column').orderBy('count DESC').limit(0, 100)
+
 ## CRUD
 ### SELECT
 Require:
