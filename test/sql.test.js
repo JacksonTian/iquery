@@ -3,6 +3,22 @@ var SQL = require('../').SQL;
 var Order = require('../').Order;
 
 describe('sql.js', function () {
+  describe('SQL', function () {
+    it('should be ok', function () {
+      var sql = new SQL();
+      sql.toString().should.equal('');
+      var sql2 = new SQL('SELECT * FROM table');
+      sql2.toString().should.equal('SELECT * FROM table');
+    });
+  });
+
+  describe('select', function () {
+    it('should be ok', function () {
+      var sql = new SQL();
+      sql.select('*').toString().should.equal('SELECT *');
+    });
+  });
+
   describe('all', function () {
     it('should be ok', function () {
       var sql = new SQL();
