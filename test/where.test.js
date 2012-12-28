@@ -261,7 +261,9 @@ describe('where.js', function () {
       where.or({
         'hehe': 'zaodianshui',
         'zaima': 'quxizao'
-      }).bracket().toString().should.equal('(hehe = :zaodianshui OR zaima = :quxizao)');
+      });
+      where.branch.should.equal(1);
+      where.bracket().toString().should.equal('(hehe = :zaodianshui OR zaima = :quxizao)');
     });
   });
 
@@ -271,7 +273,9 @@ describe('where.js', function () {
       where.toString().should.equal('');
       where.or({
         'hehe': 'zaodianshui'
-      }).bracket().and({
+      }).bracket();
+      where.branch.should.equal(0);
+      where.and({
         'zaima': "quxizao"
       }).toString().should.equal('hehe = :zaodianshui AND zaima = :quxizao');
     });
